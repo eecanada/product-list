@@ -42,6 +42,29 @@ class Total extends Component {
   }
 }
 
+class ProductForm extends Component {
+  submit = e => {
+    e.preventDefault();
+    alert(`Name: ${this.refs.name.value} -$ ${this.refs.price.value}`);
+
+    this.refs.name.value = "";
+    this.refs.price.price = "";
+  };
+
+  render() {
+    return (
+      <form onSubmit={this.submit}>
+        <input type="text" placeholder="product name" ref="name" />
+        <input type="text" placeholder="product price" ref="price" />
+        <br />
+        <br />
+        <button> Create Product </button>
+        <hr />
+      </form>
+    );
+  }
+}
+
 class ProductList extends Component {
   state = {
     total: 0,
@@ -61,17 +84,19 @@ class ProductList extends Component {
   };
 
   render() {
-    const products = this.state.productList.map((product) => {
+    const products = this.state.productList.map(product => {
       return (
         <Product
           name={product.name}
           price={product.price}
           handleShow={this.showProduct}
           handleTotal={this.calculateTotal}
-        />)
+        />
+      );
     });
     return (
       <div>
+        <ProductForm />
         {products}
         <Total total={this.state.total} />
       </div>
