@@ -9,11 +9,13 @@ class Product extends Component {
   buy = () => {
     this.setState({
       qty : this.state.qty + 1
+      
     });
+    this.props.handleTotal(this.props.price)
   }
 
   show = () => {
-    this.props.handleShow(this.props.name)
+    this.props.handleShow(this.props.name) 
   }
 
   render() {
@@ -38,7 +40,7 @@ class Total extends Component {
   render(){
     return(
       <div>
-        <h3> Total Cash: </h3>
+        <h3> Total Cash: ${this.props.total} </h3>
       </div>
     )
   }
@@ -51,6 +53,15 @@ class Total extends Component {
 
 class ProductList extends Component {
 
+    state = {
+      total: 0
+    }
+  
+
+  calculateTotal = (price) => {
+    this.setState({total: this.state.total + price}) 
+  }
+
     showProduct = (name) => {
       alert(`You selected ${name}`)
     }
@@ -58,10 +69,10 @@ class ProductList extends Component {
   render(){
     return(
       <div>
-          <Product name="Andriod" price="121" handleShow={this.showProduct}/>
-          <Product name="Apple" price="123" handleShow={this.showProduct}/>
-          <Product name="nokia" price="59" handleShow={this.showProduct}/>
-          <Total/>
+          <Product name="Andriod" price={121} handleShow={this.showProduct} handleTotal={this.calculateTotal}/>
+          <Product name="Apple" price={123} handleShow={this.showProduct} handleTotal={this.calculateTotal}/>
+          <Product name="nokia" price={59} handleShow={this.showProduct} handleTotal={this.calculateTotal}/>
+          <Total total={this.state.total}/>
       </div>
     )
   }
