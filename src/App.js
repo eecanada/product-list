@@ -15,7 +15,7 @@ class Product extends Component {
   render() {
     return (
       <div>
-        <p>Android - $199 </p>
+        <p> {this.props.name} - {this.props.price} </p>
         <button onClick={this.buy}> Buy </button>
         <h3> Qty: {this.state.qty} items(s)</h3>
         <hr/>
@@ -39,9 +39,9 @@ class ProductList extends Component {
   render(){
     return(
       <div>
-          <Product/>
-          <Product/>
-          <Product/>
+          <Product name="Andriod" price="121"/>
+          <Product name="Apple" price="123"/>
+          <Product name="nokia" price="59"/>
           <Total/>
       </div>
     )
